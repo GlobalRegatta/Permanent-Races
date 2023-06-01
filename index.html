@@ -129,20 +129,20 @@
               },
             });
 
-            var challenges = getUniqueValues(data.features, 'Challenge');
+            var courses = getUniqueValues(data.features, 'Course');
 
-            challenges.forEach(function (challenge) {
-              var lineFeatures = getLineFeatures(data.features, 'Challenge', challenge);
+            courses.forEach(function (course) {
+              var lineFeatures = getLineFeatures(data.features, 'Course', course);
 
-              map.addSource('lineData-' + challenge, {
+              map.addSource('lineData-' + course, {
                 type: 'geojson',
                 data: lineFeatures,
               });
 
               map.addLayer({
-                id: 'lines-' + challenge,
+                id: 'lines-' + course,
                 type: 'line',
-                source: 'lineData-' + challenge,
+                source: 'lineData-' + course,
                 paint: {
                   'line-color': getRandomColor(),
                   'line-width': 2,
@@ -154,7 +154,7 @@
               var coordinates = e.features[0].geometry.coordinates.slice();
               var properties = e.features[0].properties;
 
-              var description = `<h3>` + e.features[0].properties.MarkerID + `</h3>` + `<h4>` + `<b>` + `Coordinates: ` + `</b>` + e.features[0].properties.Coordinates + `</h4>` + `<h4>` + `<b>` + `Type of point: ` + `</b>` + e.features[0].properties.Point + `</h4>` + `<h4>` + `<b>` + `Challenge: ` + `</b>` + e.features[0].properties.Challenge + `</h4>` + `<h4>` + `<b>` + `Course: ` + `</b>` + e.features[0].properties.Course + `<h4>` + `<b>` + `Type of race: ` + `</b>` + e.features[0].properties.Type + e.features[0].properties.Course + `<h4>` + `<b>` + `Reference: ` + `</b>` + e.features[0].properties.Reference + `</h4>`;
+              var description = `<h3>` + e.features[0].properties.MarkerID + `</h3>` + `<h4>` + `<b>` + `Coordinates: ` + `</b>` + e.features[0].properties.Coordinates + `</h4>` + `<h4>` + `<b>` + `Type of point: ` + `</b>` + e.features[0].properties.Point + `<h4>` + `<b>` + `Type of race: ` + `</b>` + e.features[0].properties.Type + `</h4>` + `<h4>` + `<b>` + `Reference: ` + `</b>` + e.features[0].properties.Reference + `</h4>` + `<h4>` + `<b>` + `Race course n° ` + `</b>` + e.features[0].properties.Course +  `<h4>` + `<b>` + `Challenge: ` + `</b>` + e.features[0].properties.Challenge + `</h4>`;
 
               new mapboxgl.Popup()
                 .setLngLat(coordinates)
