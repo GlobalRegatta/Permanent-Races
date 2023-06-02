@@ -92,7 +92,7 @@
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/nicolamazzucchi/cliagrt3k02vo01pn474hh1ba',
-      center: [-8.736027, 49.311425],
+      center: [9.296967, 41.257393],
       zoom: 5,
       transformRequest: transformRequest,
     });
@@ -123,10 +123,18 @@
               id: 'points',
               type: 'circle',
               source: 'csvData',
-              paint: {
-                'circle-radius': 5,
+              'paint': {
+    'circle-radius': [
+      'interpolate',
+      ['linear'],
+      ['zoom'],
+      1, 1, // initial radius of 0
+      7, 5 // radius of 5 at zoom level 5 and above
+    ],
                 'circle-color': 'white',
-              },
+                'circle-stroke-width': 7,
+                'circle-stroke-color': 'rgba(0, 0, 0, 0)'
+              }
             });
 
             var courses = getUniqueValues(data.features, 'Course');
